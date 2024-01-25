@@ -43,6 +43,10 @@ span{
 }
 
 @media screen and (max-width: 463px) {
+    body{
+        overflow: hidden;
+    }
+
     .container{
         width: 200px;
         padding: 0 25px 8px;
