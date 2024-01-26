@@ -10,8 +10,14 @@ let buttn = document.getElementById("btn"),
 let totalBitSpeed, totalKbSpeed, totalMbSpeed, timeDuration, loadedBits, speedInBts, speedInKbs, speedInMbs, averageSpeedInBps, averageSpeedInKbps, averageSpeedInMbps = 0;
 let numTests = 3;
 let testCompleted = 0;
+let a = 0;
 
-buttn.onclick = () =>{
+buttn.addEventListener('click', () =>{
+    if(buttn.innerHTML == "Start"){
+        buttn.onclick = () =>{
+            a = 0;
+        }
+    if(buttn.innerHTML=="Start" && a == 0){
     init();
     bitSpeed.innerHTML = "";
     kbSpeed.innerHTML = "";
@@ -28,8 +34,9 @@ buttn.onclick = () =>{
     totalBitSpeed = 0;
     totalKbSpeed = 0;
     totalMbSpeed = 0;
-
 };
+}
+})
 
 const init = async () =>{
     info.innerHTML = "Testing...";
@@ -69,8 +76,22 @@ function calculateSpeed(){
         kbSpeed.innerHTML = `${averageSpeedInKbps}`;
         mbSpeed.innerHTML = `${averageSpeedInMbps}`;
         info.innerHTML = "Test Completed!";
+        a = 1;
+
     }else{
         init();
     }
-}
 
+    if(a == 1){
+        buttn.innerHTML = "Reset";
+        if(buttn.innerHTML == "Reset"){
+            buttn.addEventListener('click', ()=>{
+                bitSpeed.innerHTML = "";
+                kbSpeed.innerHTML = "";
+                mbSpeed.innerHTML = "";
+                info.innerHTML = "...";
+                buttn.innerHTML = "Start";
+            })
+        }
+    }
+}
