@@ -1,19 +1,34 @@
 let startTime, endTime;
 let imageSize = "";
 let image = new Image();
-let bitSpeed = document.getElementById("bits"),
+let buttn = document.getElementById("btn"),
+    bitSpeed = document.getElementById("bits"),
     kbSpeed = document.getElementById("kbs"),
     mbSpeed = document.getElementById("mbs"),
     info = document.getElementById("info");
 
-let totalBitSpeed = 0;
-let totalKbSpeed = 0;
-let totalMbSpeed = 0;
+let totalBitSpeed, totalKbSpeed, totalMbSpeed, timeDuration, loadedBits, speedInBts, speedInKbs, speedInMbs, averageSpeedInBps, averageSpeedInKbps, averageSpeedInMbps = 0;
 let numTests = 3;
 let testCompleted = 0;
 
-window.onload = () =>{
+buttn.onclick = () =>{
     init();
+    bitSpeed.innerHTML = "";
+    kbSpeed.innerHTML = "";
+    mbSpeed.innerHTML = "";
+    testCompleted = 0;
+    timeDuration = 0;
+    loadedBits = 0;
+    speedInBts = 0;
+    speedInKbs = 0;
+    speedInMbs = 0;
+    averageSpeedInBps = 0;
+    averageSpeedInKbps = 0;
+    averageSpeedInMbps = 0;
+    totalBitSpeed = 0;
+    totalKbSpeed = 0;
+    totalMbSpeed = 0;
+
 };
 
 const init = async () =>{
@@ -33,11 +48,11 @@ image.onload = async () => {
 }
 
 function calculateSpeed(){
-    let timeDuration = (endTime - startTime) / 1000;
-    let loadedBits = imageSize * 8;
-    let speedInBts = loadedBits / timeDuration;
-    let speedInKbs = speedInBts / 1024;
-    let speedInMbs = speedInKbs / 1024;
+    timeDuration = (endTime - startTime) / 1000;
+    loadedBits = imageSize * 8;
+    speedInBts = loadedBits / timeDuration;
+    speedInKbs = speedInBts / 1024;
+    speedInMbs = speedInKbs / 1024;
 
     totalBitSpeed += speedInBts;
     totalKbSpeed += speedInKbs;
@@ -46,13 +61,13 @@ function calculateSpeed(){
     testCompleted++;
 
     if(testCompleted === numTests){
-        let averageSpeedInBps = (totalBitSpeed / numTests).toFixed(2);
-        let averageSpeedInKbps = (totalKbSpeed / numTests).toFixed(2);
-        let averageSpeedInMbps = (totalMbSpeed / numTests).toFixed(2);
+        averageSpeedInBps = (totalBitSpeed / numTests).toFixed(2);
+        averageSpeedInKbps = (totalKbSpeed / numTests).toFixed(2);
+        averageSpeedInMbps = (totalMbSpeed / numTests).toFixed(2);
 
-        bitSpeed.innerHTML += `${averageSpeedInBps}`;
-        kbSpeed.innerHTML += `${averageSpeedInKbps}`;
-        mbSpeed.innerHTML += `${averageSpeedInMbps}`;
+        bitSpeed.innerHTML = `${averageSpeedInBps}`;
+        kbSpeed.innerHTML = `${averageSpeedInKbps}`;
+        mbSpeed.innerHTML = `${averageSpeedInMbps}`;
         info.innerHTML = "Test Completed!";
     }else{
         init();

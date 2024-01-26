@@ -37,7 +37,28 @@ p{
     color: #747497;
 }
 
+#btn{
+    width: 4em;
+    height: 4em;
+    border-radius: 50%;
+    border: 2px rgba(45,255,196,0.9) solid;
+    background-color: #fff;
+    color: #090931;
+    outline: none;
+    margin: 8px;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0px 0px 15px 3px rgba(45,255,196,0.9);
+}
+
+#btn:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 25px 7px rgba(45,255,196,0.9);
+}
+
 span{
+    display: flex;
+    flex-direction: row;
     font-weight: 400;
     color: #090931;
 }
